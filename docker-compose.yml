@@ -1,0 +1,21 @@
+version: '3.3'
+
+services:
+  db:
+    image: postgres
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+  webshop:
+    build: src/backend/
+    command: gunicorn webshop.wsgi:application --bind 0.0.0.0:8000
+    volumes:
+      - .:/webshop/
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    links:
+      - db:db
+
+volumes:
+  postgres_data:
