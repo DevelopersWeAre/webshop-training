@@ -1,21 +1,28 @@
-version: '3.3'
+version: '3.7'
 
 services:
-  db:
-    image: postgres
-    volumes:
-      - postgres_data:/var/lib/postgresql/data/
+  nginx:
+    build: src/nginx
+    ports:
+      - 1337:80
+    depends_on: 
+      - webshop
   webshop:
     build: src/backend/
     command: gunicorn webshop.wsgi:application --bind 0.0.0.0:8000
-    volumes:
-      - .:/webshop/
+    entrypoint: ./entrypoint.sh
     ports:
       - "8000:8000"
     depends_on:
       - db
-    links:
-      - db:db
+  db:
+    image: postgres
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=postgres
 
 volumes:
   postgres_data:

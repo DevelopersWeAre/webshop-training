@@ -3,7 +3,7 @@ from django.core.exceptions import ValidationError
 from rest_framework import serializers
 from rest_framework_jwt.settings import api_settings
 
-from users.models import UserRBACRole, Company, Message
+from users.models import UserRBACRole
 
 # Token manual
 
@@ -29,7 +29,6 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
     """
 
     role = UserAccessManagementSerializer()
-    company = CompanySerializer()
 
     class Meta:
         model = User
@@ -42,7 +41,6 @@ class UserDetailSerializer(serializers.HyperlinkedModelSerializer):
     """
 
     role = UserAccessManagementSerializer()
-    company = CompanySerializer()
 
     class Meta:
         model = User
@@ -55,7 +53,6 @@ class UserDetailSerializer(serializers.HyperlinkedModelSerializer):
             "email",
             "avatar",
             "role",
-            "company",
         )
 
 
@@ -117,7 +114,6 @@ class UserCreateSerializer(serializers.ModelSerializer):
             "password2",
             "role",
             "avatar",
-            "company",
         ]
         extra_kwargs = {
             "password": {"write_only": True},
@@ -153,7 +149,6 @@ class UserCreateSerializer(serializers.ModelSerializer):
         password = validated_data["password"]
         role = validated_data["role"]
         avatar = validated_data["avatar"]
-        company = validated_data["company"]
         user_obj = User(
             username=username,
             first_name=first_name,
@@ -161,7 +156,6 @@ class UserCreateSerializer(serializers.ModelSerializer):
             email=email,
             role=role,
             avatar=avatar,
-            company=company,
         )
         user_obj.set_password(password)
         user_obj.save()
@@ -172,11 +166,10 @@ class UserLoginSerializer(serializers.ModelSerializer):
     token = serializers.CharField(allow_blank=True, read_only=True)
     username = serializers.CharField()
     is_superuser = serializers.BooleanField(read_only=True)
-    company = CompanySerializer(read_only=True)
 
     class Meta:
         model = User
-        fields = ["username", "password", "token", "is_superuser", "company"]
+        fields = ["username", "password", "token", "is_superuser"]
         extra_kwargs = {"password": {"write_only": True}}
 
     def validate(self, data):
@@ -200,6 +193,5 @@ class UserLoginSerializer(serializers.ModelSerializer):
                 token = jwt_encode_handler(payload)
                 data["token"] = token
                 data["role"] = user_obj.role
-                data["company"] = user_obj.company
                 return data
         raise ValidationError("Unable to login with provided credentials!")
