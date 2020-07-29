@@ -15,8 +15,14 @@ ____________________________
 - ući u folder *src/backend* i pokrenuti komandu
 - ```pip install -r requirements.txt```
 
-3. Ući u folder *webshop* i pokrenuti projekat:
+3. Ući u folder *webshop* i pokrenuti projekat u dev modu:
 - ```./manage.py runserver```
 - komanda ce pokrenuti django server i u pretrazivacu ce biti dostupna test stranica na adresi: localhost:8000
+
+4. Ako je prvo pokretanje potrebno je odraditi dodatne korake:
+- Za kreiranje lokalne sqlite baze: 
+  > ```./manage.py makemigrations``` - za pripremu shema tabela
+  > ```./manage.py migrate``` - za kreiranje tabela (ili u lokalnom slucaju i baze i tabela)
+  > ```./manage.py createsuperuser``` - za kreiranje administratorskog korisnika sa kojim se prijavljujemo na endpointu: /api/v1/techops
 
 
