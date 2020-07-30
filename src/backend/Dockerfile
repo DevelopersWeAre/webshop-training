@@ -7,13 +7,15 @@ RUN apt update && apt upgrade -fy
 
 RUN mkdir /webshop
 ADD requirements.txt /webshop
+COPY entrypoint.sh /webshop
+COPY initial_data.json /webshop
 
 RUN pip install --upgrade pip
 RUN pip install --no-cache-dir -r /webshop/requirements.txt
 
-COPY . /webshop
-ADD . /webshop
+COPY ./webshop/ /webshop/
+ADD ./webshop/ /webshop/
 WORKDIR /webshop/
 
 EXPOSE 8000
-
+ENTRYPOINT [ "/webshop/entrypoint.sh" ]
