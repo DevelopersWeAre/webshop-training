@@ -20,7 +20,6 @@ from users.serializers import (
 )
 
 User = get_user_model()
-permission_handler = PermissionHandler()
 
 
 class UserListAPIView(APIView):
