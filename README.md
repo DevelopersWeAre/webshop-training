@@ -2,6 +2,12 @@
 
 Cilj ovog repozitorijuma je trening i usavršavanje veština!
 
+### Potrebne aplikacije za rad
+1. [Docker](https://docs.docker.com/get-started/)
+2. [Node]()
+3. [Git](https://git-scm.com/book/en/v2/Getting-Started-About-Version-Control)
+4. [Python](https://www.python.org/) 3.7 ili više
+
 ### Git
 
 Ukoliko vas zanima sta je git, kako funkcionise, procitajte vise o [njemu](https://git-scm.com/book/sr/v2/Po%C4%8Detak-Osnove-Gita?fbclid=IwAR1MCILDfB9aAiQOKnqNo2F2hlN0_iN5oaUUnWFKe3wjO7L3_GO7NaRJ-RY).
