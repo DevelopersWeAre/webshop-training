@@ -1,0 +1,44 @@
+[
+{
+  "model": "users.user",
+  "pk": 1,
+  "fields": {
+    "password": "pbkdf2_sha256$180000$x979kirG8hXg$Xx2trZvnKfy/Xeg12Riqc8KzYuScBgib/ryWnhCNuyU=",
+    "last_login": null,
+    "is_superuser": true,
+    "username": "webshop_admin",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2020-07-30T16:36:47.765Z",
+    "avatar": "",
+    "online": false,
+    "role": null,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "users.user",
+  "pk": 2,
+  "fields": {
+    "password": "pbkdf2_sha256$180000$d11MQC0FOtUD$1ZRFgy7jRos1HcAREpt0unKw075GUeh0jvnclZJLRCk=",
+    "last_login": null,
+    "is_superuser": true,
+    "username": "webshop",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2020-07-30T16:42:47.647Z",
+    "avatar": "",
+    "online": false,
+    "role": null,
+    "groups": [],
+    "user_permissions": []
+  }
+}
+]
