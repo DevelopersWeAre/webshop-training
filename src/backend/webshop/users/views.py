@@ -8,7 +8,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from users.models import Message, Company, UserRBACRole
+from users.models import Message, UserRBACRole
 from users.serializers import (
     UserLoginSerializer,
     UserCreateSerializer,
@@ -26,7 +26,7 @@ permission_handler = PermissionHandler()
 class UserListAPIView(APIView):
     def get(self, request, format=None):
         """
-        Lists all users or users by company if user is not superadmin
+        Lists all users or users if user is not superadmin
         :param request:
         :param format:
         :return:
@@ -35,13 +35,6 @@ class UserListAPIView(APIView):
         if request.user.is_superuser:
             users = User.objects.all()
             serializer = UserSerializer(users, many=True)
-            return Response(serializer.data, status=status.HTTP_200_OK)
-        elif (
-            request.user.role.role in ("COMPANY_ADMINISTRATOR", "TEST_MANAGER")
-            and request.user.is_active
-        ):
-            users_by_company = User.objects.filter(company=request.user.company)
-            serializer = UserSerializer(users_by_company, many=True)
             return Response(serializer.data, status=status.HTTP_200_OK)
         else:
             return Response(
@@ -57,7 +50,6 @@ class UserListAPIView(APIView):
         """
 
         serializer = UserCreateSerializer(data=request.data)
-        company = Company.objects.get(pk=request.user.company.id)
 
         if request.user.is_superuser:
             if serializer.is_valid():
@@ -65,11 +57,11 @@ class UserListAPIView(APIView):
                 return Response(serializer.data, status=status.HTTP_201_CREATED)
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         elif (
-            request.user.role.role in ("COMPANY_ADMINISTRATOR", "TEST_MANAGER")
+            request.user.role.role in ("COMPANY_ADMINISTRATOR", "INVENTORY_MANAGER")
             and request.user.is_active
         ):
             if serializer.is_valid():
-                serializer.save(company=company)
+                serializer.save()
                 return Response(serializer.data, status=status.HTTP_201_CREATED)
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         else:
