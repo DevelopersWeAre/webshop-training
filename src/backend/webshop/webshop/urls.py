@@ -19,4 +19,5 @@ from django.urls import path, include
 urlpatterns = [
     path("api/v1/techops/", admin.site.urls), # for API access
     path("accounts/", include("django.contrib.auth.urls")),
+    path("api/v1/users/", include(("users.urls", "users"), namespace="users")),
 ]
