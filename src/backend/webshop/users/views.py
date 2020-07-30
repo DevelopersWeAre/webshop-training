@@ -8,7 +8,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from users.models import Message, UserRBACRole
+from users.models import UserRBACRole
 from users.serializers import (
     UserLoginSerializer,
     UserCreateSerializer,
