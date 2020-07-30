@@ -8,7 +8,6 @@ from .views import (
     RBAC_role_list,
     RBAC_role_detail,
     UserUpdateAPIView,
-    UsersExport,
 )
 
 urlpatterns = [
