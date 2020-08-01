@@ -3,8 +3,9 @@
 Cilj ovog repozitorijuma je trening i usavršavanje veština!
 
 ### Potrebne aplikacije za rad
+
 1. [Docker](https://docs.docker.com/get-started/)
-2. [Node]()
+2. [Node](https://nodejs.org/en/) v12.18.2
 3. [Git](https://git-scm.com/book/en/v2/Getting-Started-About-Version-Control)
 4. [Python](https://www.python.org/) 3.7 ili više
 
